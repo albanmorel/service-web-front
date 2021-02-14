@@ -8,7 +8,7 @@
             <li v-for="item in items" :key="item.game_id" class="itemsWrapper" @click="redirectToComments(item.game_id)">
                 <h3 class="itemsName">{{item.name}} ({{item.is_online ? 'Multijoueurs' : 'Solo'}})</h3>
                 <div class="separator"></div>
-                <h4 class="itemsScore dot" :class=" { 'greendot': item.score > 65, 'reddot': item.score < 40}">{{item.score === -1 ? "?" : item.score}}</h4>
+                <h4 class="itemsScore dot" :class=" { 'greendot': item.score > 65, 'reddot': item.score < 40}">{{item.score === -1 ? "?" : item.score === 100 ? 99 : item.score}}</h4>
                 <p class="itemsDesc">{{item.description}}</p>
             </li>
         </ul>
@@ -28,6 +28,10 @@
 </template>
 
 <script>
+
+const axios = require('axios');
+const apiURL = 'http://163.172.182.29:8080/api/';
+
 export default {
   name: 'itemsList',
   props: {title: String, items: Array, isGame: String},  
@@ -39,13 +43,20 @@ export default {
       })      
     },
     likePost: function (item){
-      //appel api
+      this.updateAvis(item.avis_id, "addLike");
       item.like+=1;
     },
-    dislikePost: function (item){  
-      //appel api   
+    dislikePost: function (item){
+      this.updateAvis(item.avis_id, "addDislike");
       item.dislike+=1;
     },
+    updateAvis: async function(avisId, action){      
+      try {
+        await axios.get(apiURL+"avis/"+avisId+"/"+action+"/")
+      } catch (error) {
+          console.log(error);
+      }
+    }
   }
 }
 </script>

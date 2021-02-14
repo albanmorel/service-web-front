@@ -1,14 +1,10 @@
 <template>
   <div id="app" v-cloak>    
-    <router-view :games="games"/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-
-const axios = require('axios');
-const apiURL = 'http://163.172.182.29:8080/api/'
-
 
 export default {
   name: "app",
@@ -16,47 +12,12 @@ export default {
   },
   data() {
     return {
-      games : [
-                {
-                    Id : 1,
-                    Name:"Jeu 1",
-                    IsOnline: true,
-                    Desc:"Lorem ipsum dolor sit amet.",
-                    Score: 68,
-                },
-                {
-                    Id : 2,
-                    Name: "Jeu 2",
-                    IsOnline: false,
-                    Desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                    Score: 38,
-                },
-                {
-                    Id : 3,
-                    Name:"Jeu 3",
-                    IsOnline: true,
-                    Desc:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                    Score: 57,
-                },
-            ],
     };
   },
-    created : function () {
-      this.fetchData();
-    },
+    created : function () {},
     computed :{},
 
-    methods: {      
-        fetchData: async function () {
-            try {
-                const response = await axios.get(apiURL+"games/")
-                this.games = response.data
-                console.log(this.games);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    },
+    methods: {},
 };
 
 </script>
@@ -162,12 +123,6 @@ export default {
       overflow: auto;
       text-align: justify;
   }
-  .likeCounter{
-    color: #43b043;
-  }
-  .dislikeCounter{
-    color: #f23232;
-  }
   .separator{    
     display: inline-block;
     grid-column: 1 / 2;
@@ -176,7 +131,12 @@ export default {
     height: 1px;
     background-color: #dadada;
     max-width: 70%;
-
+  }
+  .likeCounter{
+    color: #43b043;
+  }
+  .dislikeCounter{
+    color: #f23232;
   }
   img{
     height: 20px;

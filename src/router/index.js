@@ -7,14 +7,20 @@ Vue.use(VueRouter)
 const routes = [  
   {
     path: '/',
-    name: 'home',
-    component: () => import('../components/Home.vue')
+    name: 'login',
+    component: () => import('../components/login.vue')
   },  
   {
     path: '/comments/:gameId',
     name: 'Comments',
     props: true,
     component: () => import('../views/Comments.vue')
+  }, 
+  {
+    path: '/home/',
+    name: 'Home',
+    props: true,
+    component: () => import('../views/Home.vue')
   },
 ]
 
