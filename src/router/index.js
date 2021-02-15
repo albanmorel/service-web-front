@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 
+Vue.prototype.authToken = "123"
 Vue.use(VueRouter)
 
 const routes = [  
