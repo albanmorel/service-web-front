@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <itemsList title="MON GROS TITRE LA HMMMMMM" :items="games" isGame='true'></itemsList>
+    <itemsList title="Commentator" :items="games" isGame='true'></itemsList>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-cloak>    
+  <div id="app" v-cloak>
     <router-view/>
   </div>
 </template>
@@ -14,7 +14,9 @@ export default {
     return {
     };
   },
-    created : function () {},
+    created : function () {
+      console.log(this.authToken)
+    },
     computed :{},
 
     methods: {},
@@ -84,20 +86,28 @@ export default {
       margin-top: 3rem;
       display: grid;
       grid-template-columns: 30% 40% 30%;
+      grid-template-rows: 3% auto;
+  }
+  .mainWrapper > span{
+    grid-column: 2/2;
+    grid-row: 1/1;
+    justify-self: start;
+      cursor: pointer;
+      user-select: none;
   }
   .mainWrapper > ul {
       grid-column: 2 / 2;
-      grid-row: 1 / 1;
+      grid-row: 2 / 2;
   }
   .lesfamchod2taregion{
       font-size: 3em;
       grid-column: 1 / 1;
-      grid-row: 1 / 1;
+      grid-row: 2 / 2;
   }
   .lesfamchod2taregion2{
       font-size: 3em;
       grid-column: 3 / 3;
-      grid-row: 1 / 1;
+      grid-row: 2 / 2;
   }
   .itemsName{
       grid-column: 1 / 1;
@@ -135,8 +145,15 @@ export default {
   .likeCounter{
     color: #43b043;
   }
+  .likeCounter.active {
+    color: #00ff00;
+  }
   .dislikeCounter{
     color: #f23232;
+  }
+  .dislikeCounter.active {
+    color: #000000;
+    
   }
   img{
     height: 20px;

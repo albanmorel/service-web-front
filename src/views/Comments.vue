@@ -1,6 +1,6 @@
 <template>
   <div class="comments">
-    <itemsList title="MON GROS TITRE LA HMMMMMM" :items="comments" isGame='false'></itemsList>
+    <itemsList title="Commentator" :items="comments" isGame='false' :gameId="gameId"></itemsList>
   </div>
 </template>
 
