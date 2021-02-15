@@ -17,7 +17,7 @@
                 <h3 class="itemsName">{{item.user.username}}</h3>
                 <div class="separator"></div>                
                 <h4 class="itemsScore">
-                  <span @click="likePost(item)"><img src='../../public/img/icons/like.png'><span class="likeCounter">{{item.like}}    </span></span>
+                  <span @click="likePost(item)"><img src='../../public/img/icons/like.png'><span class="likeCounter">{{item.like}}</span></span>
                   <span @click="dislikePost(item)"><img src='../../public/img/icons/dislike.png'><span class="dislikeCounter">{{item.dislike}}</span></span>
                 </h4>
                 <p class="itemsDesc">{{item.comment}}</p>
@@ -34,7 +34,13 @@ const apiURL = 'http://163.172.182.29:8080/api/';
 
 export default {
   name: 'itemsList',
-  props: {title: String, items: Array, isGame: String},  
+  props: {title: String, items: Array, isGame: String},
+  data() {
+    return {
+      hasLiked : false,
+      hasDisliked : false,
+    }
+  },  
   methods: {
     redirectToComments: function (itemId){
       this.$router.push({
@@ -43,12 +49,37 @@ export default {
       })      
     },
     likePost: function (item){
-      this.updateAvis(item.avis_id, "addLike");
-      item.like+=1;
+      if (!this.hasLiked){
+        this.updateAvis(item.avis_id, "addLike");
+        item.like+=1;
+        this.hasLiked = true;
+        if (this.hasDisliked){
+          this.unDislikePost(item);
+          this.hasDisliked = false;
+        }
+
+      }
     },
     dislikePost: function (item){
-      this.updateAvis(item.avis_id, "addDislike");
-      item.dislike+=1;
+      if (!this.hasDisliked){
+        this.updateAvis(item.avis_id, "addDislike");
+        item.dislike+=1;
+        this.hasDisliked = true;
+        if (this.hasLiked){
+          this.unLikePost(item);
+          this.hasLiked = false;
+        }
+      }      
+    },
+    unLikePost: function (item){
+      console.log("pass")
+        this.updateAvis(item.avis_id, "removeLike");
+        item.like-=1;
+    },
+    unDislikePost: function (item){
+      console.log("pass")
+        this.updateAvis(item.avis_id, "removeDislike");
+        item.dislike-=1;    
     },
     updateAvis: async function(avisId, action){      
       try {
